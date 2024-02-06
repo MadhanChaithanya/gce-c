@@ -1,12 +1,13 @@
 In SDLC how Many Steps we have 7 Steps
 
 Devt
-	Plan	-> Technical Architects, Business 
-
-Analysts
+	Plan	-> Technical Architects, Business Analysts
 	Code	-> Developers will write the source code
 	Build
 	Test
+	Deploy
+	Operate
+	Monitor
 
 Technical Architects will do analyse the requirements and plan 
 
