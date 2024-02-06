@@ -3,43 +3,27 @@ In SDLC how Many Steps we have 7 Steps
 Devt
 	Plan	-> Technical Architects, Business Analysts
 	Code	-> Developers will write the source code
-	Build
-	Test
-	Deploy
-	Operate
-	Monitor
+	Build	-> Adding Dependencies
+	Test	-> checking defects of the application.
+	Deploy	-> Installing Application into Server.
+	Operate	-> opening the application in different environments.
+	Monitor	-> Collecting the feedback of the live application (live streaming, errors checking, collecting app logs, performance checking,.....)
 
-Technical Architects will do analyse the requirements and plan 
-
-the architecutrue (Blueprint)
+Technical Architects will do analyse the requirements and plan the architecutrue (Blueprint)
 
 Q) Why to source write the source code?
 =====================================
 Version Control System:
 -----------------------
-1) This is the process of maintianing multiple versions of the 
+1) This is the process of maintianing multiple versions of the code.
+All the team members uplaod their code(check in) into the remote version controlling system. 
+The VCS accepts the code uplaods from multiple team members and integrates it so that when the other
+team members download the code they will be able to see the entire work done by the team
 
-code
-All the team members uplaod their code(check in) into the 
+2) VCS's also preserve older and later versions of the code so that
+at any time we can switch between which ever version we want.
 
-remote
-version controlling system. The VCS accepts the code uplaods 
-
-from 
-multiple team members and integrates it so that when the other
-team members download the code they will be able to see the 
-
-entire
-work donw by the team
-
-2) VCS's also preserve older and later versions of the code so 
-
-that
-at any time we can switch between which ever version we want
-
-3) VCS's also keep a track of who is making what kind of 
-
-changes
+3) VCS's also keep a track of who is making what kind of changes.
 
 
 VCS: 
@@ -47,33 +31,20 @@ VCS:
 	CVCS: Centralized Version Controlling System
 		SVN - It can store code on a Single Repo.
 	DVCS: Distributed Version Controlling System
-		GIT - It can store code on a Multiple 
-
-Repo.
+		GIT - It can store code on a Multiple Repo.
 
 
 CVCS: Centralized Version Controlling System
 
-Here we have a remote server(code repository) into which all the 
-
-team 
-members check in the code and all the features of version 
-
-controlling
-are implemented in this remote server
+Here we have a remote server(code repository) into which all the team members 
+check in the code and all the features of version controlling are implemented in this remote server
 
 DVCS: Distributed Version Controlling System
 
-Here we have a local repository installed on every team 
-
-members machines
-where version controlling happens at the level of individual 
-
-team members
-form where it is uploaded into a remote server where version 
-
-controlling 
-happens for the entire team
+Here we have a local repository installed on every team members machines
+where version controlling happens at the level of individual team members
+form where it is uploaded into a remote server where version controlling 
+happens for the entire team.
 
 
 Roll Back:
@@ -146,9 +117,7 @@ Stagging area is the location where file indexing happens and it
 is the buffer area of git and the files are called as indexed files
 
 3. Local Repository: where we store tracked source code.
-Local repository is where version controlling happens and the 
-
-files are called as commited files
+Local repository is where version controlling happens and the files are called as commited files.
 
 --------------------------------------------
 Working with GIT or Basic Commands of GIT:
@@ -161,9 +130,7 @@ Open "Git Bash" cd Path_of_Working_Dir
 	git init
 
 The above command will create a hidden folder called .git
-where it stores some configuration files for maintaining the local 
-
-repository.
+where it stores some configuration files for maintaining the local repository.
 
 2. To send file from working dir to stagging area
 
@@ -206,9 +173,7 @@ repository.
 .gitignore
 
 This is a special file where we can store the private filenames. 
-Any filename that is mentioned in .gitignore will not longer be 
-
-accessed by git
+Any filename that is mentioned in .gitignore will not longer be accessed by git
 
 1. Create few files
 
@@ -234,8 +199,6 @@ accessed by git
 
 	git status
 
-   It will no longer show the above created four files as 
-
-untracked 
+   It will no longer show the above created four files as untracked 
 
 -------------------------------------------------------------------------------
