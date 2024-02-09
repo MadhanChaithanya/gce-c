@@ -199,6 +199,23 @@ Any filename that is mentioned in .gitignore will not longer be accessed by git
 
 	git status
 
-   It will no longer show the above created four files as untracked 
+==============================================================
+
+Working on the Github
+=========================
+This is the remote repository into which the code is uploaded and
+this process is called as checkin
+
+1. Singup for a github account
+2. Signin into that account
+3. Click on + on top right corner
+4. Click on New repository
+5. Enter some repository name
+6. Select Public or Private
+7. Click on Create repository
+8. Go to Push an existing repository from command line and copy paste the commands
+  Enter username and password of github/personal access token of github.
+
+
 
 -------------------------------------------------------------------------------
