@@ -309,7 +309,7 @@ UseCase
 Create a mysql container and login as root user and create some sql tables
 
 1 Create a mysql container
-  docker run --name db -d -e MYSQL_ROOT_PASSWORD=intelliqit mysql:5
+  docker run --name db -d -e MYSQL_ROOT_PASSWORD=madhan mysql:5
 
 2 To check if the mysql container is running
   docker container ls
@@ -319,7 +319,7 @@ Create a mysql container and login as root user and create some sql tables
 
 4 To login into the database
   mysql -u root -p
-  Password: intelliqit
+  Password: madhan
 
 5 To see the list of databases
   show databases;
@@ -372,7 +372,7 @@ UseCase
 Setup wordpress and link it with mysql container
 
 1 Create a mysql container
-   docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=intelliqit  mysql:5
+   docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=madhan  mysql:5
 
 2 Create a wordpress container and link with the mysql container
   docker run --name mywordpress -d -p 8888:80 --link mydb:mysql wordpress
@@ -419,7 +419,7 @@ Setup CI-CD environment where a Jenkins container is linked with
 Setup LAMP architecture 
 
 1 Create mysql container
-  docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=intelliqit mysql
+  docker run --name mydb -d -e MYSQL_ROOT_PASSWORD=madhan mysql
 
 2 Create an apache container and link with mysql container
   docker run --name apache -d -p 9999:80 --link mydb:mysql httpd
@@ -480,7 +480,7 @@ services:
  mydb:
   image: mysql:5
   environment:
-   MYSQL_ROOT_PASSWORD: intelliqit
+   MYSQL_ROOT_PASSWORD: madhan
 
  mywordpress:
   image: wordpress
@@ -546,7 +546,7 @@ services:
  mydb:
   image: mysql
   environment:
-   MYSQL_ROOT_PASSWORD: intelliqit
+   MYSQL_ROOT_PASSWORD: madhan
 
  apache:
   image: httpd
@@ -811,13 +811,13 @@ SHELL : Used to specify what shell should be by default used by the image
 UseCase
 ===========
 Create a dockerfile to use nginx as abse image and specify
-the maintainer as intelliqit
+the maintainer as madhan
 
 1 Create docker file
 vim dockerfile
 
 FROM nginx
-MAINTAINER intelliqit
+MAINTAINER madhan
 
 2 To create an image from this file
   docker build -t mynginx .
@@ -834,7 +834,7 @@ git in it
 1 Create dockerfile
   vim dockerfile
   FROM ubuntu
-  MAINTAINER intelliqit
+  MAINTAINER madhan
   RUN apt-get update
   RUN apt-get install -y git
 
@@ -899,7 +899,7 @@ into the docker image  and execute it a the the time os creating the image
 3 Create the dockerfile
   vim dockerfile
   FROM ubuntu
-  MAINTIANER intelliqit
+  MAINTIANER madhan
   COPY ./script.sh /
   RUN ./script.sh
 
@@ -921,7 +921,7 @@ into it
 1 Create a dockerfile
   vim dockerfile
   FROM ubuntu
-  MAINTIANER intelliqit
+  MAINTIANER madhan
   ADD https://get.jenkins.io/war-stable/2.263.4/jenkins.war  /
 
 2 Create an image from the above dockerfile
@@ -940,7 +940,7 @@ Create a dockerfile from jenkins base image and make the default user as root
 
 1 vim dockerfile
   FROM jenkins/jenkins
-  MAINTAINER intelliqit
+  MAINTAINER madhan
   USER root
 
 2 Create an image from the above dcokerfile
@@ -957,7 +957,7 @@ Create a dockerfile from jenkins base image and make the default user as root
 Create a docekerfile from nginx base image and expose 90 port
 1 vim dockerfile
   FROM nginx
-  MAINTAIENR intelliqit
+  MAINTAIENR madhan
   EXPOSE 90
 
 2 Create an image from the above file
@@ -979,7 +979,7 @@ like nginx
 1 Create a dockerfile
   vim dockerfile
   FROM ubuntu
-  MAINTAINER intelliqit
+  MAINTAINER madhan
   RUN apt-get update
   RUN apt-get install -y nginx
   ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
@@ -1113,18 +1113,18 @@ Create a customised centos image and upload into the public registry
     exit
 
   b) Save this container as an image
-     docker commit c1 intelliqit/mycentos
+     docker commit c1 madhan/mycentos
 
 3 Login into dockerhub
   docker login
   Enter username and password of dockerhub
 
 4  Push the customised image
-   docker push intelliqit/mycentos
+   docker push madhan/mycentos
 
 ===============================================
 Note: To create network with a specific subnet range
-docker network create --driver bridge --subnet=192.168.2.0/24 intelliqit
+docker network create --driver bridge --subnet=192.168.2.0/24 madhan
 
 Docker compose by deafult creates its own customised bridge network and creates
 containers on the netowork
@@ -1138,7 +1138,7 @@ services:
   mydb:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: intelliqit
+      POSTGRES_PASSWORD: madhan
       POSTGRES_DB: mydb
       POSTGRES_USER: myuser
 
@@ -1173,7 +1173,7 @@ to start postgres and adminer container on the above created
 network
 
 1 Create a custom bridge network
-  docker network create --driver bridge --subnet 10.0.0.0/24 intelliqit
+  docker network create --driver bridge --subnet 10.0.0.0/24 madhan
 
 2 Create a docker compose file
   vim docker-compose.yml
@@ -1184,7 +1184,7 @@ services:
  db:
   image: postgres
   environment:
-   POSTGRES_PASSWORD: intelliqit
+   POSTGRES_PASSWORD: madhan
    POSTGRES_USER: myuser
    POSTGRES_DB: mydb
 
@@ -1196,7 +1196,7 @@ services:
 networks:
  default:
   external:
-   name: intelliqit
+   name: madhan
 ...
 
 3 To create the containers
@@ -1205,7 +1205,7 @@ networks:
 4 To see if adminer and postgres contianers are created
   docker container ls
 
-5 To check if they are running on intelliqit network
+5 To check if they are running on madhan network
   docker inspect container_id_from_Step4
 
 ========================================================================
@@ -1213,7 +1213,7 @@ Create a dockerfile and use it directly in docker-compsoe
 
 vim dockerfile
 FROM jenkins/jenkins
-MAINTAINER intelliqit
+MAINTAINER madhan
 RUN apt-get update
 RUN apt-get install -y git
 
@@ -1283,7 +1283,7 @@ services:
  db:
   image: mysql:5
   environment:
-   MYSQL_ROOT_PASSWORD: intelliqit
+   MYSQL_ROOT_PASSWORD: madhan
  volumes:
    mydb:/var/lib/mysql
 
@@ -1367,7 +1367,7 @@ Create mysql with 3 replicas and also pass the necessary environment
 variables
 
 1 docker service create --name db --replicas 3 
-                    -e MYSQL_ROOT_PASSWORD=intelliqit  mysql:5
+                    -e MYSQL_ROOT_PASSWORD=madhan  mysql:5
 
 2 To check if 3 replicas of mysql are running
   docker service ps db
@@ -1572,23 +1572,23 @@ browser from manager and all workers
 ============================================================================
 UseCase
 ===========
-Create 2 overlay networks intelliqit1 and intelliqit2
-Create httpd with 5 replacs on intelliqit1 network
+Create 2 overlay networks madhan1 and madhan2
+Create httpd with 5 replacs on madhan1 network
 Create tomcat with 5 replicas on default overlay "ingres" network
-and later perform rolling network update to intelliqit2 network
+and later perform rolling network update to madhan2 network
 
 1 Create 2 overlay networks
-  docker network create  --driver overlay intelliqit1
-  docker network create  --driver overlay intelliqit2
+  docker network create  --driver overlay madhan1
+  docker network create  --driver overlay madhan2
 
 2 Check if 2 overlay networks are created
   docker network ls
 
 3 Create httpd with 5 replcias on inteliiqit1 network
   docker service create  --name webserver -p 8888:80 --replicas 5 
-                                           --network intelliqit1 httpd
+                                           --network madhan1 httpd
 
-4 To check if httpd is running on intelliqit1 network
+4 To check if httpd is running on madhan1 network
   docker service inspect webserver
   This command will generate the output in JSON format
   To see the above output in normal text fromat
@@ -1597,14 +1597,14 @@ and later perform rolling network update to intelliqit2 network
 5 Create tomcat with 5 replicas on the deafult ingres network
   docker service create --name appserver -p 9999:8080 --replicas 5 tomcat
 
-6 Perform a rolling network update from ingres to intelliqit2 network
-  docker service update --network-add intelliqit2 appserver
+6 Perform a rolling network update from ingres to madhan2 network
+  docker service update --network-add madhan2 appserver
 
-7 Check if tomcat is now running on intelliqit2 network
+7 Check if tomcat is now running on madhan2 network
   docker service inspect appserver --pretty
 
-Note: To remove from intelliqit2 network
-      docker service update --network-rm intelliqit2 appserver
+Note: To remove from madhan2 network
+      docker service update --network-rm madhan2 appserver
 
 
 ===============================================================================
@@ -1644,7 +1644,7 @@ services:
  db:
   image: "mysql:5"
   environment:
-   MYSQL_ROOT_PASSWORD: intelliqit
+   MYSQL_ROOT_PASSWORD: madhan
 
  wordpress:
   image: wordpress
@@ -1770,7 +1770,7 @@ These secrets are created on the host machine and they will be
 availbale from all the replicas in the swarm cluster
 
 1 Create a dcoker secret
-  echo " Hello Intelliqit" | docker secret create mysecret -
+  echo " Hello madhan" | docker secret create mysecret -
 
 2 Create a redis db with 5 replace and mount the secret
   docker service create --name myredis --replicas 5 --secret mysecret redis
@@ -1787,7 +1787,7 @@ Create 3 secrets for postgres user,password and db
 and pass them to the stack file
 
 1 Create secrets
-  echo "intelliqit" | docker secret create pg_password -
+  echo "madhan" | docker secret create pg_password -
   echo "myuser" | docker secret create pg_user -
   echo "mydb" | docker secret create pg_db -
 
