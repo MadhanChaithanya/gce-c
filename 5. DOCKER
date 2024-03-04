@@ -176,7 +176,7 @@ RUN apt install git maven tree apache2 -y
 COPY index.html /tmp
 ADD https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz /tmp
 WORKDIR /tmp
-LABEL author rahamshaik
+LABEL author madhan
 
 
 docker inspect cont7 
@@ -191,7 +191,7 @@ RUN apt install git maven tree apache2 -y
 COPY index.html /tmp
 ADD https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz /tmp
 WORKDIR /tmp
-LABEL author rahamshaik
+LABEL author madhan
 ENV name vijay
 ENV client swiggy
 
@@ -208,7 +208,7 @@ RUN apt install git maven tree apache2 -y
 COPY index.html /tmp
 ADD https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz /tmp
 WORKDIR /tmp
-LABEL author rahamshaik
+LABEL author madhan
 ENV name vijay
 ENV client swiggy
 VOLUME ["/volume1"]
