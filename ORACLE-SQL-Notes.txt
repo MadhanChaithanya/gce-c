@@ -1,0 +1,890 @@
+Moduke-3: SQL:
+==============
+	- SQL stands for structure query language which was introduced by IBM for 
+communicating with databases.
+	- The initial name is "SEQUEL" and later renamed as "SQL".
+	- SQL is not a case sensitive language.i.e we can write sql queries in upper case
+or in lower case or combination of upper and lower case characters.
+	Ex:
+	SELECT * FROM EMP; --------> allowed
+	select * from emp;---------> allowed
+	SeLecT * From Emp;-----> allowed
+
+Sub-languages of SQL:
+===================
+1. Data Definition Language(DDL):
+=============================
+	- create
+	- alter 
+		> alter - modify	
+		> alter - add
+		> alter - rename
+		> alter - drop
+	- rename
+	- truncate
+	- drop
+
+Latest features:
+==============
+	- recyclebin
+	- flashback
+	- purge
+
+2. Data Manipulation Language(DML):
+===============================
+	- insert
+	- update
+	- delete
+
+Latest features:
+=============
+	- insert all
+	- merge
+
+3. Data Query Language(DQL) / Data Retrieval Language(DRL):
+====================================================
+	- select 
+
+4. Transaction Control Language(TCL):
+=================================
+	- commit
+	- rollback
+	- savepoint
+
+5. Data Control Language(DCL):
+==========================
+	- grant
+	- revoke
+
+
+1) CREATE:
+==========
+	- to create a new object in database.
+	Ex: Table,View,Synonym,Sequence,.......etc
+Datatypes in Oracle:
+=================
+	- Datatype is an attribute to specify "what type of data" is storing into a column.
+	- Oracle supports the following datatypes are,
+		1. Numeric datatypes
+		2. String / Character datatypes
+		3. Long datatype
+		4. Date datatypes
+		5. Raw and Long Raw datatypes
+		6. LOB datatypes
+
+1. Numeric datatypes:
+===================
+	i) int :
+		- this datatype column will store integer values only.
+
+	ii) number(p,s):
+		- thise datatype column will store integer and float values.
+		- if number(p) then store "integer values"only.
+		- if number(p,s) then store "float  values" only.
+
+Precision(p):
+===========
+	- it counts all digits including left and right sides of a decimal point.
+
+	Ex:
+	i) 67.24
+	precision = 4
+
+	ii) 9873.28
+	precision = 6
+
+Scale(s):
+=======
+	- it counts the right side digits only.
+
+	Ex:
+	i) 67.24
+	scale = 2
+	precision = 4
+
+	ii) 9873.281
+	scale = 3
+	precision = 7
+
+	Ex:
+			Price Number(6,2)
+			================
+	1.1---------------------------> 1.1 
+	23.14-----------------------> 23.14
+	452.65---------------------> 452.65
+	999.99--------------------> 999.99
+	4500.00------------------> 4500.00
+	45000.00 ---------------> error
+	9999.99 -----------------> 9999.99
+	10000.00----------------> error
+	957.342------------------> error
+	98345.39----------------> error
+
+2. String / Character datatypes:
+==========================
+	- these datatypes are allowed string format data only.
+	- in databases string can be represented with '<string>' only.
+
+	Ex:	Ename char(10)
+		=============	
+	smith-------> error
+	'smith'------> smith
+
+	1021 --------> error
+	'1021' -------> 1021
+
+			 string format data
+				|
+		characters only		alphanumeric                
+		   string data		string data
+		            |			         |
+		[ A-Z (or) a - z ]		[ A-Z (or) a-z , 0-9,@,#,$,%,&,_,.... ]
+	Ex: 'SMITH','allen',.......etc	        Ex: 'sai123@gmail.com',password,HTno,...etc
+
+	> string / character datatypes are again classified into two ways,
+		1. Non-Unicode datatypes
+		======================
+		- these datatypes are storing localized data i.e English langauge only.
+			- char(size)
+			- varchar2(size)
+
+		2. Unicode datatypes
+		==================
+		- these datatypes are storing globalized data i.e all national langauges.
+			- Nchar(size)
+			- Nvarchar2(size)
+		- "N" stands for "national language".
+
+char(size):
+=========
+	- it is a fixed length datatype (static).
+	- it will store non-unicode characters only(i.e english language)
+	in the form of 1 char = 1 byte.
+	- maximum size is 2000 bytes.
+
+	Ex:
+		Ename char(10)
+		=============
+	'hello'-----> hello ---------------> 5 bytes / 10 bytes ---- left 5 bytes (wasted)
+	'hel' -------> hel ------------------> 3 bytes / 10 bytes ---- left 7 bytes (wasted)
+	'he' --------> he -------------------> 2 bytes / 10 bytes ---- left 8 bytes (wasted)
+
+	Disadvantage:
+	=============
+		- memory wasted.
+
+varchar2(size):
+=============
+	- it is a variable length datatype (dynamic).
+	- it will store non-unicode characters only(i.e english language)
+	in the form of 1 char = 1 byte.
+	- maximum size is 4000 bytes. 
+
+	Ex:
+		Ename varchar2(10)
+		================
+	'hello'-----> hello ---------------> 5 bytes / 5 bytes ---- left 0 bytes (not wasted)
+	'hel' -------> hel ------------------> 3 bytes / 3 bytes ---- left 0 bytes (not wasted)
+	'he' --------> he -------------------> 2 bytes / 2 bytes ---- left 0 bytes (not wasted)
+
+	advantage:
+	=============
+		- memory saved.
+
+Nchar(size):
+==========
+	- it is a fixed length datatype (static).
+	- it will store unicode characters only(i.e all national languages)
+	in the form of 1 char = 1 byte.
+	- maximum size is 2000 bytes.
+
+	Ex:
+		Ename Nchar(10)
+		=============
+	'hello'-----> hello ---------------> 5 bytes / 10 bytes ---- left 5 bytes (wasted)
+	'hel' -------> hel ------------------> 3 bytes / 10 bytes ---- left 7 bytes (wasted)
+	'he' --------> he -------------------> 2 bytes / 10 bytes ---- left 8 bytes (wasted)
+
+	Disadvantage:
+	=============
+		- memory wasted.
+
+ Nvarchar2(size):
+==============
+	- it is a variable length datatype (dynamic).
+	- it will store unicode characters only(i.e all national languages)
+	in the form of 1 char = 1 byte.
+	- maximum size is 4000 bytes. 
+
+	Ex:
+		Ename Nvarchar2(10)
+		================
+	'hello'-----> hello ---------------> 5 bytes / 5 bytes ---- left 0 bytes (not wasted)
+	'hel' -------> hel ------------------> 3 bytes / 3 bytes ---- left 0 bytes (not wasted)
+	'he' --------> he -------------------> 2 bytes / 2 bytes ---- left 0 bytes (not wasted)
+
+	advantage:
+	=============
+		- memory saved.
+
+3. Long datatype:
+===============
+	- it is a variable length datatype (dynamic).
+	- it will store non-unicode & unicode characters only in the form of 1 char = 1 byte.
+	- maximum size is 2gb. 
+	- a table is having only one long datatype column.
+
+4. Date datatypes:
+================
+	- storing date and time information.
+	- date from '01-jan-4712 bc' to '31-dec-9999 ad'.
+		i) date
+		ii) timestamp
+i) date:
+======
+	- this datatype is allowed date and time information 
+of a particular day.
+	- time is optional.if user is not insert time information 
+then oracle server will take '12:00:00am' / '00:00:00am' by default.
+	- default format of date datatype is,
+		'DD-MON-YY/YYYY  HH:MI:SS am/pm'
+		'08-JUN-23/2023  17:08:22 pm '
+	- date datatype is occupied 7 bytes.(fixed memory)
+		'DD-MON-YY/YYYY  HH:MI:SSam/pm'
+		  1     1         2           1    1      1 ---------------> 7 bytes
+
+ii) timestamp:
+============	
+	- this datatype is allowed date and time information 
+along with milli seconds.
+	- default format of timestamp datatype is,
+		'DD-MON-YY/YYYY  HH:MI:SS.MS am/pm'
+		'08-JUN-23/2023  17:08:22.0000 pm '
+	- date datatype is occupied 11 bytes.(fixed memory)
+		'DD-MON-YY/YYYY  HH:MI:SS.MS am/pm'
+		  1     1         2           1    1   1    4 ---------------> 11 bytes
+5. Raw and Long Raw datatypes:
+============================
+	- to storing image / audio / video file in the form of 0101000101010101 binary format.
+		Raw ----- 2000 bytes(static)
+		Long Raw	----- 2gb(dynamic)
+
+6. LOB datatypes:
+================
+	- LOB stands for large objects.
+		- BLOB
+		- CLOB
+		- NCLOB
+BLOB:
+=====
+	- it stands for binary large object.
+	- storing image / audio / video files in the form of binary format.
+	- it is a dynamic datatype.
+	- maximum size is 4gb.
+
+CLOB:
+=====
+	- it stands for character large object.
+	- storing non-unicode characters.
+	- it is a dynamic datatype.
+	- maximum size is 4gb.
+NCLOB:
+=======
+	- it stands for national charcter large object.
+	- storing unicode characters.
+	- it is a dynamic datatype.
+	- maximum size is 4gb.
+
+Non-unicode characters :
+=====================
+	> char(size)	- 2000 bytes
+	> varchar2(size)	- 4000 bytes
+	> long 		- 2gb
+	> clob		- 4gb
+
+Unicode characters :
+=====================
+	> Nchar(size)	- 2000 bytes
+	> Nvarchar2(size)	- 4000 bytes
+	> long 		- 2gb
+	> Nclob		- 4gb
+
+
+Binary data:
+==========
+	> raw		- 2000 bytes
+	> long raw	- 2gb
+	> blob		- 4gb
+
+How to create a new table in oracle DB:
+=================================
+syntax:
+======
+create table <table name>(<column name1> <datatype>[size],<column name2> <datatype>[size],<column name3> <datatype>[size],..............................................................);
+
+Note:
+=====
+	1. a table is a collection of rows and columns.
+		- a table contains minimum 1 column and maxium 1000 columns.
+		- a table contains "unlimited" rows.
+
+Ex:
+Enter user-name: system/tiger
+SQL> CREATE USER MYDB3PM IDENTIFIED BY MYDB3PM;
+User created.
+
+SQL> GRANT CONNECT TO MYDB3PM;
+Grant succeeded.
+
+SQL> GRANT CREATE TABLE TO MYDB3PM;
+Grant succeeded.
+
+SQL> GRANT ALL PRIVILEGES TO MYDB3PM;
+		
+Ex:
+SQL> CONN
+Enter user-name: MYDB3PM/MYDB3PM
+Connected.
+
+SQL> CREATE TABLE STUDENT(STID INT,SNAME CHAR(10),SFEE NUMBER(6,2));
+Table created.
+
+How to view the structure of a table in oracle db:
+=========================================
+syntax:
+======
+desc <table name>;
+
+Ex:
+SQL> DESC STUDENT;
+
+How to view the list of tables in oracle db:
+===================================
+syntax:
+=======
+select  *  from tab;
+
+Ex:
+SQL> SELECT * FROM TAB;
+=========================================================================
+ALTER:
+=======
+	- to modify / change the structure of a table.
+	- sub commands of alter command,
+		i) alter - modify
+		ii) alter - add
+		iii) alter - rename
+		iv) alter - drop
+
+i) alter - modify:
+=============
+	- to change datatype from one datatype to another datatype and also to change 
+the size of datatype.
+
+syntax:
+======
+alter table <table name> modify <column name> <new datatype>[new size];
+
+EX:
+SQL> ALTER TABLE STUDENT MODIFY SNAME VARCHAR2(20);
+
+ii) alter - add:
+============
+	- this command is used to add a new column to an existing table.
+
+syntax:
+=======
+alter table <table name> add <new column name> <datatype>[size];
+
+EX:
+SQL> ALTER TABLE STUDENT ADD SADDRESS VARCHAR2(10);
+
+iii) alter - rename:
+===============
+	- to change a column name in a table.
+
+syntax:
+=======
+alter table <table name> rename <column> <old column name> to <new column name>;
+
+EX:
+SQL> ALTER TABLE STUDENT RENAME COLUMN SNAME TO STUDENT_NAME;
+
+iv) alter - drop:
+============
+	- to delete a specific column from a table.
+
+syntax:
+======
+alter table <table name> drop <column> <column name>;
+
+EX:
+SQL> ALTER TABLE STUDENT DROP COLUMN SFEE;
+
+RENAME:
+========
+	- to change a table name.
+syntax:
+======
+rename <old table name> to <new table name>;
+
+EX:
+SQL> RENAME STUDENT TO STUDENT_DETAILS;
+SQL> RENAME STUDENT_DETAILS TO STUDENT;
+
+TRUNCATE:
+==========
+	- is used to delete all rows but not columns of a table.
+	- by using truncate we cannot delete a specific row from a table because it does not
+support "WHERE" clause condition.
+	- rows are deleted permanently.so that we cannot restore rows into a table.
+
+syntax:
+=======
+truncate table <table name>;
+
+Ex:
+SQL> TRUNCATE TABLE DEPT;
+
+DROP :
+======
+	- to delete a table ( rows and columns ) from a database.
+
+syntax:
+======
+drop table <table name>;
+
+EX:
+SQL> DROP TABLE STUDENT;
+
+Note:
+=====
+	- before oracle10g enterprise edition once we drop a table from database then it
+was permanently dropped. but from oracle10g enterprise edition onwards once we drop a
+table from database then it was temporarly dropped.
+
+New features in oracle10g enterprise edition:
+======================================
+	1. recyclebin
+	2. flashback
+	3. purge
+
+1. recyclebin:
+===========
+	- it is a pre-defined table / system defined table.
+	- this table will save the information about dropped tables.
+	- it is similar to windows recyclebin in computer.
+
+To view the structure of recyclebin table:
+===================================
+syntax:
+=======
+desc recyclebin;
+
+EX:
+SQL> DESC RECYCLEBIN;
+
+To view dropped tables in recyclebin:
+===============================
+syntax:
+=======
+SELECT OBJECT_NAME,ORIGINAL_NAME FROM RECYCLEBIN;
+
+OBJECT_NAME					ORIGINAL_NAME
+----------------------------------------------------------------------------	----------------------------------------------------
+BIN$sZqM6vzzTB+TNw0rV8cOng==$0			STUDENT
+
+2. flashback:
+===========
+	- it is a ddl command which is used to restore a table 
+from recyclebin to database memory.
+
+syntax:
+=======
+flashback table <table name> to before drop;
+
+EX:
+SQL> FLASHBACK TABLE STUDENT TO BEFORE DROP;
+
+3) PURGE:
+=========
+	- to delete a table permanently.
+
+case-1 : deleting a table from recyclebin:
+==================================
+syntax:
+=======
+purge table <table name>;
+
+EX:
+SQL> PURGE TABLE TEST1;
+
+case-2 : deleting all tables from recyclebin:
+====================================
+syntax:
+======
+purge recyclebin;
+
+EX:
+SQL> PURGE RECYCLEBIN;
+Recyclebin purged.
+
+case=3: deleting a table from database permanently:
+============================================
+syntax:
+======
+drop table <table name> purge;
+
+Ex:
+SQL> DROP TABLE STUDENT PURGE;
+
+II) DML:
+=======
+INSERT:
+=======
+	- to insert a new row data into a table.
+
+method-1:
+========
+syntax:
+=======
+insert into <table name> values(value1,value2,..............);
+
+EX:
+SQL> CREATE TABLE STUDENT(STID INT,SNAME VARCHAR2(10),SFEE NUMBER(6,2));
+
+Granting insert data  permission:
+============================
+SQL> CONN
+Enter user-name: system/tiger
+Connected.
+SQL> GRANT UNLIMITED TABLESPACE TO MYDB3PM;
+
+SQL> CONN 
+Enter user-name: MYDB3PM/MYDB3PM
+SQL> INSERT INTO STUDENT VALUES(1021,'SMITH');
+ERROR at line 1:
+ORA-00947: not enough values
+
+SQL> INSERT INTO STUDENT VALUES(1021,'SMITH',3000,4500);
+ERROR at line 1:
+ORA-00913: too many values
+
+SQL> INSERT INTO STUDENT VALUES(1021,'SMITH',3000);
+1 row created.
+
+NOTE: in this method we should insert all values as per columns in a table.i.e no.of COLUMNS
+must be match with no.of passing value.
+		
+method-2:
+========
+syntax:
+======
+insert into <table name>(list of columns names) values(value1,valu2,.....);
+
+EX:
+SQL> INSERT INTO STUDENT(STID,SNAME,SFEE)VALUES(1022,'ALLEN',5000);
+SQL> INSERT INTO STUDENT(STID,SNAME)VALUES(1023,'WARD');
+SQL> INSERT INTO STUDENT(STID)VALUES(1024);
+
+NOTE:
+======
+	- we inserting values for required columns only.
+
+How to insert data into a table dynamically:
+=====================================
+	& : inserting values into a column at runtime level.
+
+method-1:
+========
+syntax:
+=======
+insert into <table name> values(&value1,&value2,..............);
+
+EX:
+SQL> INSERT INTO STUDENT VALUES(&STID,'&SNAME',&SFEE);
+Enter value for stid: 1025
+Enter value for sname: SCOTT
+Enter value for sfee: 3400
+
+SQL> / (TO RE-EXECUTE THE LAST EXECUTED SQL QUERY IN SQLPLUS EDITOR)
+Enter value for stid: 1026
+Enter value for sname: WARNER
+Enter value for sfee: 5600
+
+method-2:
+========
+syntax:
+======
+insert into <table name>(list of columns names) values(value1,valu2,.....);
+
+EX:
+SQL> INSERT INTO STUDENT(STID)VALUES(&STID);
+Enter value for stid: 1028
+
+SQL> /
+Enter value for stid: 1029
+
+SQL> /
+Enter value for stid: 1030
+
+UPDATE:
+=======
+	- to update all rows data in a table.
+		(or)
+	- to update a specific row data in a table by using "where" clause condition.
+
+syntax:
+======
+update <table name> set <column name1>=<value1>,............. [where <condition>];
+
+Ex:
+SQL> UPDATE STUDENT SET SNAME='JONES',SFEE=6000 WHERE STID=1029;
+SQL> UPDATE STUDENT SET SFEE=5000;
+
+DELETE:
+========
+	- to delete all rows from a table.
+		(or)
+	- to delete a specific row from a table by using "where" condition.
+
+syntax:
+======
+delete from <table name> [where <condition>];
+
+EX:
+SQL> DELETE FROM STUDENT WHERE SNAME='ALLEN';
+SQL> DELETE FROM STUDENT;
+
+DELETE vs TRUNCATE:
+====================
+	
+	DELETE					TRUNCATE
+	=======					==========
+1. it is a DML command.				1. it is a DDL command.
+
+2. it can delete a specific row.				2. not possible.
+
+3. it supports "where" clause condition.			3. it is not supports "where" clause 
+						condition.
+
+4. it is a temporary data deletion.			4. it is a permanent data deletion
+
+5. we can restore deleted data by using			5. it is not possible.
+"rollback" command.
+
+6. execution speed of delete command 			6. execution speed of truncate is 
+is slow.						fast.
+(deleting rows in one by one manner)			(deleting rows as a page wise)
+
+
+3) DQL / DRL:
+============
+I) SELECT :
+==========
+	- to read / retrieving all rows from a table at a time.
+			(or)
+	- to read / retrieving a specific row / (s) from a table by using "where" clause
+	condition.
+
+syntax:
+=======
+select * / <list of columns> from <table name> [ where <condition>];
+
+	Here,
+		" * " ---- all columns in a table.
+
+Ex:
+SQL> SELECT * FROM DEPT;
+	(OR)
+SQL> SELECT DEPTNO,DNAME,LOC FROM DEPT;
+
+EX:
+SQL> SELECT * FROM EMP WHERE EMPNO=7788;
+SQL> SELECT * FROM EMP WHERE JOB='CLERK';
+
+ALIAS NAMES:
+============
+	- it is a temporary name for columns / table name.
+	- alias can be created at two levels.
+i) column level :
+===============
+	- in this level, we are creating alias names for columns.
+syntax:
+=======
+	<column name> [as] <column alias name>;
+
+ii) table level:
+============
+	- in this level,we are creating alias names for table name.
+	
+syntax:
+=======
+	<table name> <table alias name>;
+
+CREATING ALIAS NAMES OF THE COMBINATION OF COLUMN AND TABLE LEVELS:
+=======================================================================
+syntax:
+=======
+select <column name1> [as] <column alias name1>,<column name2> [as] <column alias name2>,....................... <table name> <table alias name>;
+
+
+Ex:
+SQL> SELECT DEPTNO AS X,DNAME AS Y,LOC AS Z FROM DEPT D;
+		(OR)
+SQL> SELECT DEPTNO X,DNAME Y,LOC Z FROM DEPT D;
+
+CONCATENATION OPERATOR( || ):
+==========================
+	- to add two or more than two string expressions.
+
+syntax:
+======
+	<string1> || <string2> || <string3> || ...........................;
+
+Ex:
+SQL> SELECT 'GOOD'||'EVENING' FROM DUAL;
+
+OUTPUT:
+---------------
+GOODEVENING
+
+Ex:
+SQL> SELECT 'THE EMPLOYEE'||' '||ENAME||' '||'WORKING AS A'||' '||JOB FROM EMP;
+
+OUTPUT:
+-----------------
+THE EMPLOYEE SMITH WORKING AS A CLERK
+
+DISTINCT KEYWORD:
+==================
+	- it is a pre-defined keyword which is used to eliminate duplicate values.
+
+syntax:
+======
+	<distinct> <column name>;
+
+EX:
+SQL> SELECT DISTINCT DEPTNO FROM EMP ORDER BY DEPTNO;
+SQL> SELECT DISTINCT JOB FROM EMP;
+
+NOTE:
+=====
+	- to retrieving  / display a large scale data in proper systematically order then
+we need to set the following two properties like below,
+		i) pagesize n
+		ii) lines n
+
+i) pagesize n:
+===========
+	- this property is used to disply the no.of rows per a page.
+	- by default 1 page = 14 rows.here "n" is nothing but the size of a page.
+
+ syntax:
+=======
+	set pagesize n;
+
+Ex:
+	set pagesize 100;
+	
+Note:
+=====
+	- the maximum size of a page in oracle database is 0 - 50000.
+
+ii) lines n:
+========
+	- this property is used to display no.of characters in a single line.
+	- by default a line contains 80 bytes (i.e 1 char = 1 byte , 80 char's = 80 bytes).
+	
+syntax:
+=======
+SET LINES n;
+
+Ex:
+SET LINES 150;
+
+NOTE:
+=====
+	- The maximum size of lines property is from 1 byte - 32767 bytes.
+==============================================================================
+HOW TO CREATE A NEW TABLE FROM AN EXISTING TABLE:
+===================================================
+case-1: without rows (data):
+========================
+syntax:
+=======
+create table <new table name> as select * from <old table name> where <false condition>;
+
+Ex:
+SQL> CREATE TABLE NEWDEPT1 AS SELECT * FROM DEPT WHERE 1=2;
+
+case-2: with rows (data):
+========================
+syntax:
+=======
+create table <new table name> as select * from <old table name> where <true condition>;
+
+Ex:
+SQL> CREATE TABLE NEWDEPT2 AS SELECT * FROM DEPT WHERE 1=1;
+
+case-3: with specific rows:
+=======================
+syntax:
+=======
+create table <new table name> as select * from <old table name> where <specific condition>;
+
+Ex:
+SQL> CREATE TABLE NEWEMP1 AS SELECT * FROM EMP WHERE JOB='CLERK';
+
+case-4: with specific columns:
+===========================
+syntax:
+=======
+create table <new table name> as select <list of columns>  from <old table name>;
+
+Ex:
+SQL> CREATE TABLE NEWEMP2 AS SELECT EMPNO,ENAME,SAL FROM EMP;
+
+How to copy data from one table to another table:
+===========================================
+syntax:
+======
+insert into <destination table name> select * from <source table name>;
+
+Ex:
+SQL> INSERT INTO NEWDEPT1 SELECT * FROM DEPT;
+
+INSERT ALL:
+===========
+	- it is  DML command is used to insert an existing table data into multiple 
+tables at a time.
+
+syntax:
+======
+insert all into <tn1> values(<column name1>,<column name2>,.................)
+into <tn2> values(<column name1>,<column name2,..................................)
+....................................................................................................................
+....................................................................................................................
+into <tn n> values(<column name1>,<column name2>,..............................)
+select * from <old table name>;
+
+EX:
+CREATING EMPTY TABLES:
+=========================
+SQL> CREATE TABLE TEST1 AS SELECT * FROM DEPT WHERE 1=0;
+SQL> CREATE TABLE TEST2 AS SELECT * FROM DEPT WHERE 1=0;
+SQL> CREATE TABLE TEST3 AS SELECT * FROM DEPT WHERE 1=0;
+
+INSERTING DATA INTO TABLES:
+===========================
+SQL> INSERT ALL INTO TEST1 VALUES(DEPTNO,DNAME,LOC)
+  2  INTO TEST2 VALUES(DEPTNO,DNAME,LOC)
+  3  INTO TEST3 VALUES(DEPTNO,DNAME,LOC)
+  4  SELECT * FROM DEPT;
+
+CALLING TABLES:
+================
+SQL> SELECT * FROM TEST1;
+SQL> SELECT * FROM TEST2;
+SQL> SELECT * FROM TEST3;
+
